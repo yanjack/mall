@@ -1,0 +1,35 @@
+
+server:
+  port: 5558
+spring:
+  application:
+    name: mall-gateway
+  cloud:
+    gateway:
+      discovery:
+        locator:
+          enabled: true
+      routes:
+        - id: user
+          uri: lb://user-service
+          predicates:
+            - Path=/user/**
+        - id: order
+          uri: lb://order-service
+          predicates:
+            - Path=/order/**
+
+
+
+eureka:
+  instance:
+    preferIpAddress: true
+    leaseRenewalIntervalInSeconds: 10
+    statusPageUrlPath: /admin/info
+    healthCheckUrlPath: /admin/health
+  client:
+    serviceUrl:
+      defaultZone: http://localhost:5678/eureka/
+    register-with-eureka: true
+    fetch-registry: true
+

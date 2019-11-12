@@ -1,0 +1,18 @@
+spring:
+  application:
+    name: mall-eureka
+server:
+  port: 5678
+
+# Configure this Discovery Server
+eureka:
+  instance:
+    hostname: localhost
+    preferIpAddress: true
+  client:  # Not a client, don't register with yourself
+    registerWithEureka: false
+    fetchRegistry: false
+    serviceUrl:
+      defaultZone: http://localhost:${server.port}/eureka/
+  #
+

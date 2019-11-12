@@ -1,0 +1,74 @@
+server:
+  port: 5551
+spring:
+  application:
+    name: mall-web
+  mvc:
+    view:
+      prefix: /WEB-INF/pages/
+      suffix: .jsp
+
+  jackson:
+    time-zone: GMT+8
+
+  servlet:
+    multipart:
+      max-file-size: 10MB
+      max-request-size: 10MB
+
+
+eureka:
+  instance:
+    preferIpAddress: true
+    leaseRenewalIntervalInSeconds: 10
+    statusPageUrlPath: /admin/info
+    healthCheckUrlPath: /admin/health
+  client:
+    serviceUrl:
+      defaultZone: http://localhost:5678/eureka/
+    #      defaultZone: http://127.0.0.1:8808/eureka/
+    register-with-eureka: true
+    fetch-registry: true
+feign:
+  httpclient:
+    enabled: false
+  okhttp:
+    enabled: true
+
+hystrix:
+  command:
+    default:
+      execution:
+        timeout:
+          enabled: true
+        isolation:
+          thread:
+            timeoutInMilliseconds: 500000
+
+ribbon:
+  ReadTimeout: 5000000
+  ConnectTimeout: 500000
+
+#logging:
+#  level:
+#    root: info
+#  config: classpath:log-dev.xml
+
+#super_manager:
+#  password: 8c6976e5b5410415bde908bd4dee15dfb167a9c873fc4bb8a81f6f2ab448a918
+
+#application:
+#  host:
+#    sport: http://ligudev.com/
+#    baobei: http://bb.h5.ligusports.com/
+
+#system:
+#  isFinalClient: true
+
+#oa:
+#  auto:
+#    url: http://172.16.6.18:8080/oa/api/auth/authUserLogin.do
+#    platformType: LIGUYD
+#
+#version:
+#  web: 1.2.4

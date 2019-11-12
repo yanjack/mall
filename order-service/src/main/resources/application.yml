@@ -1,0 +1,161 @@
+
+server:
+  port: 5553
+spring:
+  application:
+    name: order-service
+  datasource:
+    url: jdbc:mysql://127.0.0.1:3306/user?useUnicode=true&characterEncoding=UTF-8&serverTimezone=Asia/Shanghai&useSSL=false&allowPublicKeyRetrieval=true
+    username: root
+    password: 1234
+    driverClassName: com.mysql.cj.jdbc.Driver
+    druid:
+      type: com.alibaba.druid.pool.DruidDataSource
+      initialSize: 1
+      minIdle: 3
+      maxActive: 20
+      maxWait: 60000
+      timeBetweenEvictionRunsMillis: 60000
+      minEvictableIdleTimeMillis: 30000
+      validationQuery: select 'x'
+      testWhileIdle: true
+      testOnBorrow: false
+      testOnReturn: false
+      poolPreparedStatements: true
+      maxPoolPreparedStatementPerConnectionSize: 20
+      filters: stat,wall,slf4j
+      connectionProperties: druid.stat.mergeSql=true;druid.stat.slowSqlMillis=5000
+      useGlobalDataSourceStat: true
+#  rabbitmq:
+#    listener:
+#      direct:
+#        acknowledge-mode:
+#  redis:
+#    host: 172.16.4.118
+#    port: 6382
+#    timeout: 1000
+#    #password: CbE35eq&e5
+
+#  jackson:
+#    serialization:
+#      write-dates-as-timestamps: true
+#  main:
+#    allow-bean-definition-overriding: true
+#  rabbitmq:
+#    host: 172.16.4.117
+#    port: 5672
+#    username: guest
+#    password: guest
+#    virtualHost: /
+#    durbale: true
+mybatis:
+  config-locations: classpath:mybatis/mybatis-config.xml
+  mapper-locations: classpath:mybatis/mapper/*.xml #ע�⣺һ��Ҫ��Ӧmapperӳ��xml�ļ�������·��,
+  type-aliases-package: com.example.user.api.mode
+eureka:
+  instance:
+    preferIpAddress: true
+    leaseRenewalIntervalInSeconds: 10
+    statusPageUrlPath: /admin/info
+    healthCheckUrlPath: /admin/health
+  client:
+    serviceUrl:
+      defaultZone: http://localhost:5678/eureka/
+    register-with-eureka: true
+    fetch-registry: true
+#feign:
+#  httpclient:
+#    enabled: false
+#  okhttp:
+#    enabled: true
+#
+#hystrix:
+#  command:
+#    default:
+#      execution:
+#        timeout:
+#          enabled: true
+#        isolation:
+#          thread:
+#            timeoutInMilliseconds: 30000
+#
+#ribbon:
+#  ReadTimeout: 30000
+#  ConnectTimeout: 30000
+
+#rabbitmqconfig:
+#  #����
+#  queues:
+#    - name: synchronizedStepData
+#      #����������,������ʱĬΪtopicExchange,������ģʽ(directExchange,topicExchange,fanoutExchange,delayExchange)
+#      exchangeName: directExchange
+#      #·�ɹؼ���,������ʱĬΪ��������
+#      routingKey: iteamSynchronizedStepData
+#      #�Ƿ�־û�,������ʱĬ��true
+#      durable: true
+#      #�Ƿ�Ϊ��������,������ʱĬ��false
+#      exclusive: false
+#      #�Ƿ��Զ�ɾ��,������ʱĬ��false
+#      autoDelete: false
+#
+#    - name: asyncMatchDataRollback
+#      #����������,������ʱĬΪtopicExchange,������ģʽ(directExchange,topicExchange,fanoutExchange,delayExchange)
+#      exchangeName: directExchange
+#      #·�ɹؼ���,������ʱĬΪ��������
+#      routingKey: iteamAsyncMatchDataRollback
+#      #�Ƿ�־û�,������ʱĬ��true
+#      durable: fase
+#      #�Ƿ�Ϊ��������,������ʱĬ��false
+#      exclusive: false
+#      #�Ƿ��Զ�ɾ��,������ʱĬ��false
+#      autoDelete: false
+#
+#    - name: matchMSGDelayPush
+#      #����������,������ʱĬΪtopicExchange,������ģʽ(directExchange,topicExchange,fanoutExchange,delayExchange)
+#      exchangeName: delayExchange
+#      #·�ɹؼ���,������ʱĬΪ��������
+#      routingKey: iteamMatchMSGDelayPush
+#      #�Ƿ�־û�,������ʱĬ��true
+#      durable: fase
+#      #�Ƿ�Ϊ��������,������ʱĬ��false
+#      exclusive: false
+#      #�Ƿ��Զ�ɾ��,������ʱĬ��false
+#      autoDelete: false
+#
+#    - name: joinTeamApplyExpired
+#      #����������,������ʱĬΪtopicExchange,������ģʽ(directExchange,topicExchange,fanoutExchange,delayExchange)
+#      exchangeName: delayExchange
+#      #·�ɹؼ���,������ʱĬΪ��������
+#      routingKey: itemTeamApplyExpired
+#      #�Ƿ�־û�,������ʱĬ��true
+#      durable: fase
+#      #�Ƿ�Ϊ��������,������ʱĬ��false
+#      exclusive: false
+#      #�Ƿ��Զ�ɾ��,������ʱĬ��false
+#      autoDelete: false
+
+#logging:
+#  level:
+#    root: info
+#  config: classpath:log-dev.xml
+#
+#application:
+#  host:
+#    sport: http://ligudev.com/
+#    baobei: http://bb.h5.ligusports.com/
+
+##springboot2.x ����˵�
+#management:
+#  server:
+#    #ָ�������ſɵ��ùرսӿڣ����Ա�������port��address����ֹ������©����ֱ�ӵ��ӿھͰѷ���ص���
+#    #curl -X POST http://127.0.0.1:port/actuator/shutdown
+#    port: 7909
+#    address: 127.0.0.1
+#  endpoints:
+#    web:
+#      exposure:
+#        include:
+#          shutdown
+#  endpoint:
+#    shutdown:
+#      enabled: true

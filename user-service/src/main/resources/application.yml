@@ -1,0 +1,123 @@
+
+server:
+  port: 5552
+spring:
+  application:
+    name: user-service
+  datasource:
+    druid:
+      url: jdbc:mysql://127.0.0.1:3306/user?useUnicode=true&characterEncoding=UTF-8&serverTimezone=Asia/Shanghai&useSSL=false&allowPublicKeyRetrieval=true
+      username: root
+      password: 1234
+#      name: druidDataSource
+      type: com.alibaba.druid.pool.DruidDataSource
+      driverClassName: com.mysql.cj.jdbc.Driver
+      initialSize: 1
+      minIdle: 3
+      maxActive: 20
+      maxWait: 60000
+      timeBetweenEvictionRunsMillis: 60000
+      minEvictableIdleTimeMillis: 30000
+      validationQuery: select 'x'
+      testWhileIdle: true
+      testOnBorrow: false
+      testOnReturn: false
+      poolPreparedStatements: true
+      maxPoolPreparedStatementPerConnectionSize: 20
+      filters: stat,wall,slf4j
+      connectionProperties: druid.stat.mergeSql=true;druid.stat.slowSqlMillis=5000
+      useGlobalDataSourceStat: true
+#  rabbitmq:
+#    listener:
+#      direct:
+#        acknowledge-mode:
+#  redis:
+#    host: 172.16.4.118
+#    port: 6382
+#    timeout: 1000
+#    #password: CbE35eq&e5
+
+#  jackson:
+#    serialization:
+#      write-dates-as-timestamps: true
+#  main:
+#    allow-bean-definition-overriding: true
+  rabbitmq:
+    host: 127.0.0.1
+    port: 5672
+    username: guest
+    password: guest
+    virtualHost: /
+    durbale: true
+mybatis:
+  config-locations: classpath:mybatis/mybatis-config.xml
+  mapper-locations: classpath:mybatis/mapper/*.xml
+  type-aliases-package: com.example.user.api.mode
+  # spring boot集成mybatis的方式打印sql
+  configuration:
+    log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
+
+#pagehelper分页插件
+pagehelper:
+  helperDialect: mysql
+  reasonable: true
+  supportMethodsArguments: true
+  params: count=countSql
+
+eureka:
+  instance:
+    preferIpAddress: true
+    leaseRenewalIntervalInSeconds: 10
+    statusPageUrlPath: /admin/info
+    healthCheckUrlPath: /admin/health
+  client:
+    serviceUrl:
+      defaultZone: http://localhost:5678/eureka/
+    register-with-eureka: true
+    fetch-registry: true
+#feign:
+#  httpclient:
+#    enabled: false
+#  okhttp:
+#    enabled: true
+#
+#hystrix:
+#  command:
+#    default:
+#      execution:
+#        timeout:
+#          enabled: true
+#        isolation:
+#          thread:
+#            timeoutInMilliseconds: 30000
+#
+#ribbon:
+#  ReadTimeout: 30000
+#  ConnectTimeout: 30000
+
+rabbitmqconfig:
+  #rabbitmq
+  queues:
+    - name: testqueue #队列名称
+      #交换机名称,不配置时默为topic_exchange,共四种模式(direct_exchange,topic_exchange,fanout_exchange,delay_exchange)
+      exchangeName: direct_exchange
+      #路由关键字,不配置时默为队列名称
+      routingKey: testkey
+      #是否持久化,不配置时默认true
+      durable: true
+      #是否为排他队列,不配置时默认false
+      exclusive: false
+      #是否自动删除,不配置时默认false
+      autoDelete: false
+
+    - name: queuetest2 #队列名称
+      #交换机名称,不配置时默为topic_exchange,共四种模式(direct_exchange,topic_exchange,fanout_exchange,delay_exchange)
+      exchangeName: direct_exchange
+      #路由关键字,不配置时默为队列名称
+      routingKey: queuetest2
+      #是否持久化,不配置时默认true
+      durable: true
+      #是否为排他队列,不配置时默认false
+      exclusive: false
+      #是否自动删除,不配置时默认false
+      autoDelete: false

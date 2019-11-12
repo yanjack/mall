@@ -1,0 +1,141 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.example.userservice.dao.UserDao">
+  <resultMap id="BaseResultMap" type="com.example.user.api.mode.UserBean">
+    <id column="ID" jdbcType="INTEGER" property="id" />
+    <result column="ENABLE" jdbcType="BIT" property="enable" />
+    <result column="CTIME" jdbcType="TIMESTAMP" property="ctime" />
+    <result column="MTIME" jdbcType="TIMESTAMP" property="mtime" />
+    <result column="NAME" jdbcType="VARCHAR" property="name" />
+    <result column="PASS_WORD" jdbcType="VARCHAR" property="passWord" />
+    <result column="PHONE" jdbcType="VARCHAR" property="phone" />
+    <result column="EMAIL" jdbcType="VARCHAR" property="email" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    ID, ENABLE, CTIME, MTIME, NAME, PASS_WORD, PHONE, EMAIL
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from user
+    where ID = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from user
+    where ID = #{id,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.example.user.api.mode.UserBean">
+    insert into user (ID, ENABLE, CTIME, 
+      MTIME, NAME, PASS_WORD, 
+      PHONE, EMAIL)
+    values (#{id,jdbcType=INTEGER}, #{enable,jdbcType=BIT}, #{ctime,jdbcType=TIMESTAMP}, 
+      #{mtime,jdbcType=TIMESTAMP}, #{name,jdbcType=VARCHAR}, #{passWord,jdbcType=VARCHAR}, 
+      #{phone,jdbcType=VARCHAR}, #{email,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.example.user.api.mode.UserBean">
+    insert into user
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        ID,
+      </if>
+      <if test="enable != null">
+        ENABLE,
+      </if>
+      <if test="ctime != null">
+        CTIME,
+      </if>
+      <if test="mtime != null">
+        MTIME,
+      </if>
+      <if test="name != null">
+        NAME,
+      </if>
+      <if test="passWord != null">
+        PASS_WORD,
+      </if>
+      <if test="phone != null">
+        PHONE,
+      </if>
+      <if test="email != null">
+        EMAIL,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="enable != null">
+        #{enable,jdbcType=BIT},
+      </if>
+      <if test="ctime != null">
+        #{ctime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="mtime != null">
+        #{mtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="name != null">
+        #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="passWord != null">
+        #{passWord,jdbcType=VARCHAR},
+      </if>
+      <if test="phone != null">
+        #{phone,jdbcType=VARCHAR},
+      </if>
+      <if test="email != null">
+        #{email,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.example.user.api.mode.UserBean">
+    update user
+    <set>
+      <if test="enable != null">
+        ENABLE = #{enable,jdbcType=BIT},
+      </if>
+      <if test="ctime != null">
+        CTIME = #{ctime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="mtime != null">
+        MTIME = #{mtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="name != null">
+        NAME = #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="passWord != null">
+        PASS_WORD = #{passWord,jdbcType=VARCHAR},
+      </if>
+      <if test="phone != null">
+        PHONE = #{phone,jdbcType=VARCHAR},
+      </if>
+      <if test="email != null">
+        EMAIL = #{email,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where ID = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.example.user.api.mode.UserBean">
+    update user
+    set ENABLE = #{enable,jdbcType=BIT},
+      CTIME = #{ctime,jdbcType=TIMESTAMP},
+      MTIME = #{mtime,jdbcType=TIMESTAMP},
+      NAME = #{name,jdbcType=VARCHAR},
+      PASS_WORD = #{passWord,jdbcType=VARCHAR},
+      PHONE = #{phone,jdbcType=VARCHAR},
+      EMAIL = #{email,jdbcType=VARCHAR}
+    where ID = #{id,jdbcType=INTEGER}
+  </update>
+
+  <select id="selectByPhone"  resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List" />
+    from user
+    where phone = #{phone}
+  </select>
+
+  <select id="listAll"  resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List" />
+    from user
+  </select>
+</mapper>
