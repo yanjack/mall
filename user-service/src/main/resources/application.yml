@@ -4,6 +4,11 @@ server:
 spring:
   application:
     name: user-service
+  redis:
+    host: 127.0.0.1
+    port: 6379
+    #password: 7=XT5wInpy
+    timeout: 1000
   datasource:
     druid:
       url: jdbc:mysql://127.0.0.1:3306/user?useUnicode=true&characterEncoding=UTF-8&serverTimezone=Asia/Shanghai&useSSL=false&allowPublicKeyRetrieval=true

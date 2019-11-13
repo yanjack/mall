@@ -92,11 +92,12 @@
             <artifactId>mall-mq</artifactId>
             <version>0.0.1-SNAPSHOT</version>
         </dependency>
-<!--        <dependency>-->
-<!--            <groupId>com.ligusports</groupId>-->
-<!--            <artifactId>ligu-mq</artifactId>-->
-<!--            <version>1.0-SNAPSHOT</version>-->
-<!--        </dependency>-->
+        <dependency>
+            <groupId>com.example</groupId>
+            <artifactId>mall-cache</artifactId>
+            <version>0.0.1-SNAPSHOT</version>
+        </dependency>
+
 
     </dependencies>
 
