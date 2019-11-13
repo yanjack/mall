@@ -2,13 +2,37 @@
 server:
   port: 5558
 spring:
+  debugging: true
   application:
     name: mall-gateway
+  datasource:
+    url: jdbc:mysql://127.0.0.1:3306/user?useUnicode=true&characterEncoding=UTF-8&serverTimezone=Asia/Shanghai&useSSL=false&allowPublicKeyRetrieval=true
+    username: root
+    password: 1234
+    druid:
+      type: com.alibaba.druid.pool.DruidDataSource
+      driverClassName: com.mysql.cj.jdbc.Driver
+      initialSize: 1
+      minIdle: 3
+      maxActive: 20
+      maxWait: 60000
+      timeBetweenEvictionRunsMillis: 60000
+      minEvictableIdleTimeMillis: 30000
+      validationQuery: select 'x'
+      testWhileIdle: true
+      testOnBorrow: false
+      testOnReturn: false
+      poolPreparedStatements: true
+      maxPoolPreparedStatementPerConnectionSize: 20
+      filters: stat,wall,slf4j
+      connectionProperties: druid.stat.mergeSql=true;druid.stat.slowSqlMillis=5000
+      useGlobalDataSourceStat: true
   cloud:
     gateway:
       discovery:
         locator:
           enabled: true
+      #路由转发 predicates断言根据请求路径把请求转发各微服务
       routes:
         - id: user
           uri: lb://user-service
@@ -18,8 +42,6 @@ spring:
           uri: lb://order-service
           predicates:
             - Path=/order/**
-
-
 
 eureka:
   instance:
@@ -33,3 +55,7 @@ eureka:
     register-with-eureka: true
     fetch-registry: true
 
+mybatis:
+  #config-locations: classpath:mybatis/mybatis-config.xml
+  mapper-locations: classpath:mapper/*.xml
+  type-aliases-package: com.example.user.api.mode
