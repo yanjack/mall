@@ -54,8 +54,8 @@ mybatis:
   mapper-locations: classpath:mybatis/mapper/*.xml
   type-aliases-package: com.example.user.api.mode
   # spring boot集成mybatis的方式打印sql
-  configuration:
-    log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
+#  configuration:
+#    log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
 
 #pagehelper分页插件
 pagehelper:
@@ -121,3 +121,5 @@ rabbitmqconfig:
       exclusive: false
       #是否自动删除,不配置时默认false
       autoDelete: false
+#日志
+logging.config: classpath:log-dev.xml

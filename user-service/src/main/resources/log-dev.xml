@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<configuration>
+    <include resource="org/springframework/boot/logging/logback/defaults.xml" />
+    <property name="LOG_PATTERN" value="[%X{receiveTime}%d] [${PID:- } %t\\(%logger\\) : %p] [%X{requestInfo} %X{headInfo}] %class{30}#%method\\(%file:%line\\)%n%m%n%n"/>
+    <property name="LOG_NO_HEADER_PATTERN" value="%d [${PID:- } %t\\(%logger\\) : %p] [%X{requestInfo}] %class{30}#%method\\(%file:%line\\)%n%m%n%n"/>
+    <property name="FILE_PATH" value="/data/project/logs/mall/user/user"/>
+    <include resource="org/springframework/boot/logging/logback/console-appender.xml"/>
+
+    <appender name="PROJECT" class="ch.qos.logback.core.rolling.RollingFileAppender">
+        <file>${FILE_PATH}.log</file>
+        <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+            <fileNamePattern>${FILE_PATH}-%d{yyyy-MM-dd}-%i.log</fileNamePattern>
+            <maxHistory>30</maxHistory>
+            <timeBasedFileNamingAndTriggeringPolicy class="ch.qos.logback.core.rolling.SizeAndTimeBasedFNATP">
+                <maxFileSize>50MB</maxFileSize>
+            </timeBasedFileNamingAndTriggeringPolicy>
+        </rollingPolicy>
+        <encoder>
+            <pattern>${LOG_PATTERN}</pattern>
+        </encoder>
+    </appender>
+
+    <appender name="ASYNC" class="ch.qos.logback.classic.AsyncAppender">
+        <!--
+        默认情况下，当阻塞队列剩余 20％ 的容量时将删除 TRACE，DEBUG 和 INFO 级别的事件，只保留 WARN 和 ERROR 级别的事件
+        设置 discardingThreshold 为 0 将保留所有事件
+        -->
+        <discardingThreshold>0</discardingThreshold>
+        <!-- 如果为 true, 则调用者数据将可用于远程主机. 默认情况下不可用 ==> 也就是让上面的 class method file line 可用 -->
+        <includeCallerData>true</includeCallerData>
+        <appender-ref ref ="PROJECT"/>
+    </appender>
+
+    <appender name="SQL" class="ch.qos.logback.core.rolling.RollingFileAppender">
+        <file>${FILE_PATH}-sql.log</file>
+        <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+            <fileNamePattern>${FILE_PATH}-sql-%d{yyyy-MM-dd}-%i.log</fileNamePattern>
+            <maxHistory>90</maxHistory>
+            <timeBasedFileNamingAndTriggeringPolicy class="ch.qos.logback.core.rolling.SizeAndTimeBasedFNATP">
+                <maxFileSize>50MB</maxFileSize>
+            </timeBasedFileNamingAndTriggeringPolicy>
+        </rollingPolicy>
+
+        <encoder>
+            <pattern>${LOG_NO_HEADER_PATTERN}</pattern>
+        </encoder>
+    </appender>
+
+    <appender name="MQ" class="ch.qos.logback.core.rolling.RollingFileAppender">
+        <file>${FILE_PATH}-mq.log</file>
+        <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+            <fileNamePattern>${FILE_PATH}-mq-%d{yyyy-MM-dd}-%i.log</fileNamePattern>
+            <maxHistory>90</maxHistory>
+            <timeBasedFileNamingAndTriggeringPolicy class="ch.qos.logback.core.rolling.SizeAndTimeBasedFNATP">
+                <maxFileSize>50MB</maxFileSize>
+            </timeBasedFileNamingAndTriggeringPolicy>
+        </rollingPolicy>
+
+        <encoder>
+            <pattern>${LOG_PATTERN}</pattern>
+        </encoder>
+    </appender>
+    <logger name="com.hhly.business" level="info"/>
+    <logger name="com.hhly.config" level="warn"/>
+    <logger name="org.hibernate" level="warn"/>
+    <logger name="org.mybatis" level="warn"/>
+    <logger name="freemarker" level="warn"/>
+    <logger name="org.apache" level="warn"/>
+    <logger name="com.github" level="warn"/>
+    <logger name="com.alibaba" level="warn"/>
+    <logger name="org.springframework" level="warn"/>
+
+    <logger name="com.example.userservice.dao" level="info" additivity="false">
+        <appender-ref ref="SQL" />
+    </logger>
+
+
+    <logger name="mqLog" level="info" additivity="false">
+        <appender-ref ref="MQ" />
+    </logger>
+
+    <root level="info">
+        <appender-ref ref="ASYNC"/>
+        <appender-ref ref="CONSOLE"/>
+        <appender-ref ref="SQL"/>
+    </root>
+</configuration>
