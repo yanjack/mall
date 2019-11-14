@@ -6,8 +6,8 @@ spring:
     name: user-service
   redis:
     host: 127.0.0.1
-    port: 6379
-    #password: 7=XT5wInpy
+    port: 6381
+    password: 7=XT5wInpy
     timeout: 1000
   datasource:
     druid:

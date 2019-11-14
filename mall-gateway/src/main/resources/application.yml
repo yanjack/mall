@@ -5,6 +5,11 @@ spring:
   debugging: true
   application:
     name: mall-gateway
+  redis:
+    host: 127.0.0.1
+    port: 6381
+    password: 7=XT5wInpy
+    timeout: 1000
   datasource:
     url: jdbc:mysql://127.0.0.1:3306/user?useUnicode=true&characterEncoding=UTF-8&serverTimezone=Asia/Shanghai&useSSL=false&allowPublicKeyRetrieval=true
     username: root
@@ -32,7 +37,7 @@ spring:
       discovery:
         locator:
           enabled: true
-      #Â·ÓÉ×ª·¢ predicates¶ÏÑÔ¸ù¾ÝÇëÇóÂ·¾¶°ÑÇëÇó×ª·¢¸÷Î¢·þÎñ
+      #Â·ï¿½ï¿½×ªï¿½ï¿½ predicatesï¿½ï¿½ï¿½Ô¸ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Â·ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½×ªï¿½ï¿½ï¿½ï¿½Î¢ï¿½ï¿½ï¿½ï¿½
       routes:
         - id: user
           uri: lb://user-service
