@@ -109,7 +109,7 @@ public class RequestWhritAndTokenFilter implements GlobalFilter, Ordered {
         //接口需要验证token
         if(interfaceBean.getToken()){
             //token为空
-            if(token.isEmpty()){
+            if(null == token || token.isEmpty()){
                 //不合法(响应未登录的异常)
                 //设置headers
                 httpResponseHeaders.add("Content-Type", "application/json; charset=UTF-8");
@@ -152,7 +152,7 @@ public class RequestWhritAndTokenFilter implements GlobalFilter, Ordered {
             }
         }else{
             //不需要token但是有传token 刷新token
-            if(!token.isEmpty()){
+            if(null != token && !token.isEmpty()){
                 TokenInfoDto tokenInfoDto = (TokenInfoDto) redisUtil.get(RedisConstants.TOKEN+token.get(0));
                 if(null!=tokenInfoDto){
                     //刷新token过期时间
