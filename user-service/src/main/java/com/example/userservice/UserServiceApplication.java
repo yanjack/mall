@@ -20,7 +20,7 @@ import javax.annotation.Resource;
 @EnableDiscoveryClient
 @MapperScan(value = "com.example.userservice.dao")
 @RestController
-@ComponentScan(basePackages = "com.*")
+@ComponentScan(basePackages = "com.example.*")
 //@ComponentScan(value ="com.example.userservice.*" )
 public class UserServiceApplication {
 

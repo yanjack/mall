@@ -6,6 +6,7 @@ import com.example.user.api.mode.UserBean;
 import com.example.userservice.service.UserService;
 
 import com.github.pagehelper.PageInfo;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;
@@ -20,6 +21,8 @@ public class UserController extends BaseController {
     @Resource
     UserService userService;
 
+    @Value("${spring.redis.port}")
+    String redisPort;
 
     @PostMapping(value = "/insert")
     public UserBean insert(@RequestBody UserBean userBean) {
@@ -29,7 +32,13 @@ public class UserController extends BaseController {
     @GetMapping(value = "/selectByPhone")
     public UserBean selectByPhone(@RequestParam("phone") String phone) {
 //        System.out.println(request.getParameter("phone"));
+        ttt();
+        System.out.println(redisPort);
         return userService.selectByPhone(phone);
+    }
+
+    private void ttt(){
+        System.out.println("11111111111");
     }
 
     @GetMapping(value = "/listAll")

@@ -1,0 +1,22 @@
+server:
+  port: 5559
+
+spring:
+  application:
+    name: config-server
+  cloud:
+    config:
+      server:
+        git:
+          uri: https://github.com/yanjack/mall
+          search-paths: config-repo
+          #username: username  #账号密码写真实的快一些我觉得，不使用也能访问有点慢
+          #password: password
+eureka:
+  instance:
+    leaseRenewalIntervalInSeconds: 10
+  client:
+    serviceUrl:
+      defaultZone: http://localhost:5678/eureka/
+    register-with-eureka: true
+    fetch-registry: true
