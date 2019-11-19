@@ -1,5 +1,6 @@
 package com.example.orderservice.controller;
 
+import com.example.mallcommon.exception.BaseException;
 import com.example.orderservice.feign.UserFeign;
 import com.example.user.api.mode.UserBean;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -14,7 +15,7 @@ public class OrderController {
     UserFeign userFeign;
 
     @GetMapping("order/test")
-    public UserBean test(){
+    public UserBean test() throws BaseException {
         return userFeign.selectByPhone("18574635085");
     }
 }

@@ -2,6 +2,7 @@ package com.example.userservice.controller;
 
 
 
+import com.example.mallcommon.exception.BaseException;
 import com.example.user.api.mode.UserBean;
 import com.example.userservice.service.UserService;
 
@@ -30,10 +31,13 @@ public class UserController extends BaseController {
     }
 
     @GetMapping(value = "/selectByPhone")
-    public UserBean selectByPhone(@RequestParam("phone") String phone) {
+    public UserBean selectByPhone(@RequestParam("phone") String phone) throws BaseException {
 //        System.out.println(request.getParameter("phone"));
         ttt();
         System.out.println(redisPort);
+        if(1==1){
+            throw new BaseException("1004","异常测试");
+        }
         return userService.selectByPhone(phone);
     }
 

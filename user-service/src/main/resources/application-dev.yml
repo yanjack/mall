@@ -1,6 +1,6 @@
 
 server:
-  port: 5552
+  port: 5582
 spring:
   application:
     name: user-service
@@ -69,6 +69,7 @@ pagehelper:
   supportMethodsArguments: true
   params: count=countSql
 
+
 eureka:
   instance:
     preferIpAddress: true
@@ -128,3 +129,6 @@ rabbitmqconfig:
       autoDelete: false
 #日志
 logging.config: classpath:log-dev.xml
+feign:
+  hystrix:
+    enabled: false

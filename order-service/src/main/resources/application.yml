@@ -64,6 +64,9 @@ eureka:
     register-with-eureka: true
     fetch-registry: true
 #feign:
+#  hystrix:
+#    enabled: false
+#feign:
 #  httpclient:
 #    enabled: false
 #  okhttp:

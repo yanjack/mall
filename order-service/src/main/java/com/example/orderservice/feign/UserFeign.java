@@ -1,5 +1,6 @@
 package com.example.orderservice.feign;
 
+import com.example.mallcommon.exception.FeginErrorDecoder;
 import com.example.user.api.api.UserApi;
 import org.springframework.cloud.openfeign.FeignClient;
 
