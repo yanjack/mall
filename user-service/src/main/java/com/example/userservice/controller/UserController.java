@@ -7,6 +7,10 @@ import com.example.user.api.mode.UserBean;
 import com.example.userservice.service.UserService;
 
 import com.github.pagehelper.PageInfo;
+import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiImplicitParam;
+import io.swagger.annotations.ApiOperation;
+import io.swagger.annotations.ApiParam;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.web.bind.annotation.*;
 
@@ -17,6 +21,7 @@ import java.util.Date;
 //@Controller(value = "/api/user")
 @RestController
 @RequestMapping("user")
+@Api(value = "UserController",tags = "用户")
 public class UserController extends BaseController {
 
     @Resource
@@ -26,11 +31,14 @@ public class UserController extends BaseController {
     String redisPort;
 
     @PostMapping(value = "/insert")
-    public UserBean insert(@RequestBody UserBean userBean) {
+    @ApiOperation("新增用户")
+    public UserBean insert(@RequestBody @ApiParam(value = "json",name = "UserBean") UserBean userBean) {
         return userService.insert(userBean);
     }
 
     @GetMapping(value = "/selectByPhone")
+    @ApiOperation("根据电话查询")
+    @ApiImplicitParam(value = "phone",name = "dianhua",dataType = "String",paramType = "query")
     public UserBean selectByPhone(@RequestParam("phone") String phone) throws BaseException {
 //        System.out.println(request.getParameter("phone"));
         ttt();
